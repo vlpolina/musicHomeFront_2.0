@@ -1,0 +1,35 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-react": {
+          "runtime": "automatic",
+          "importSource": "@emotion/react"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@emotion/babel-plugin",
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "@features": "./features",
+          "@providers": "./providers",
+          "@helpers": "./helpers",
+          "@shared": "./shared",
+          "@widgets": "./widgets",
+          "@icons": "./shared/ui/icons",
+          "@hooks": "./shared/lib/hooks",
+          "@utils": "./utils",
+          "@styles": "./styles",
+          "@customTypes": "./customTypes",
+          "@lib": "./lib"
+        }
+      }
+    ]
+  ]
+}

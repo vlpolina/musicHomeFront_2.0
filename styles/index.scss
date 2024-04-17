@@ -1,0 +1,262 @@
+// @import '@shared/ui/InputDate/TimePicker.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  sm: '@media (min-width: 576px)',
+  md: '@media (min-width: 768px)',
+  lg: '@media (min-width: 992px)',
+  xl: '@media (min-width: 1200px)',
+*/
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+body,
+select {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.sidebar_opened {
+  & .layout_content,
+  & footer {
+    // margin-left: var(--sidebar-width);margin-left
+  }
+
+  @media (max-width: 768px) {
+    & .layout_content,
+    & footer {
+      margin-left: 0;
+    }
+  }
+}
+
+input,
+textarea {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  outline: none;
+}
+
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: calc(100% - 130px);
+  max-width: var(--container-width);
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    width: calc(100% - 30px);
+  }
+}
+
+.body-container {
+  min-height: 90vh;
+  padding-top: 50px;
+}
+
+.hide-scroll {
+  @media (min-width: 768px) {
+    padding-right: 15px;
+    overflow: hidden;
+    -moz-padding-end: 0;
+  }
+}
+
+.scroll-disabled {
+  height: 100%;
+  overflow: hidden;
+}
+
+.error-text {
+  color: var(--additional-error);
+
+  a {
+    color: inherit;
+  }
+}
+
+/* Стили для селектора */
+.rc-select {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  background-color: var(--base-300);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.rc-select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: flex;
+  font-size: 22px;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.rc-select-selector {
+  width: 100%;
+}
+
+.rc-select-single .rc-select-selector {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+.rc-select-single .rc-select-selection-search {
+  width: 100%;
+  height: 100%;
+}
+
+.rc-select-single .rc-select-selection-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+}
+
+.rc-select-single .rc-select-selection-item,
+.rc-select-single .rc-select-selection-placeholder,
+.rc-select-selector .rc-select-selection-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: calc(100% - 12px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.rc-select-single .rc-select-selection-item {
+  font-size: 14px;
+  color: var(--content-900);
+}
+
+.rc-select-single .rc-select-selection-placeholder,
+.rc-select-selector .rc-select-selection-placeholder {
+  color: var(--content-800);
+}
+
+.rc-select-dropdown {
+  position: absolute;
+  top: 10px;
+  z-index: var(--z-index-9);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  background: var(--base-100);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.rc-select-dropdown-hidden {
+  display: none;
+  width: 0 !important;
+  min-width: 0 !important;
+  visibility: hidden;
+}
+
+.rc-select-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+.rc-select-item-group {
+  font-size: 80%;
+  font-weight: bold;
+  color: var(--content-800);
+}
+
+.rc-select-item-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.rc-select-item-option-grouped {
+  padding-left: 24px;
+}
+
+.rc-select-item-option .rc-select-item-option-state {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  pointer-events: none;
+}
+
+.rc-select-item-option-active {
+  background: var(--base-100);
+}
+
+.rc-select-item-option-disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.rc-select-item-empty {
+  color: var(--content-800);
+  text-align: center;
+}
+
+.rc-select-selection-overflow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.rc-select-selection-overflow-item {
+  padding: 4px 8px;
+}
+
+.rc-select-selection-item-content {
+  padding-right: 4px;
+}
+
+.rc-select-clear {
+  display: flex;
+  align-items: center;
+  padding-right: 34px;
+  cursor: pointer;
+}
+
+.rc-select-clear-icon {
+  font-size: 22px;
+}
+
+input.rc-select-selection-search-input[type='search']::-webkit-search-decoration,
+input.rc-select-selection-search-input[type='search']::-webkit-search-cancel-button,
+input.rc-select-selection-search-input[type='search']::-webkit-search-results-button,
+input.rc-select-selection-search-input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
+.react-time-picker--disabled {
+  background-color: inherit;
+}

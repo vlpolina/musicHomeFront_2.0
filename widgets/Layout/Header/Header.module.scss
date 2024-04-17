@@ -1,0 +1,15 @@
+.logo {
+  height: 40px;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.menuItems {
+  position: relative;
+}
+
+.active {
+  border-bottom: 2px solid #181c25;
+}
