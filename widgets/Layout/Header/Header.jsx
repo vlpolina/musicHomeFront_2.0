@@ -7,8 +7,6 @@ import { Burger } from '@shared/ui/Burger/Burger'
 import Button from '@shared/ui/Button/Button'
 import { CloseButton } from '@shared/ui/CloseButton/CloseButton'
 
-import { ButtonVariants } from '../../../shared/ui/Button/Button'
-
 // import useSession from '@shared/lib/hooks/useSession'
 // import { Notification } from '../Notifications'
 import cls from './Header.module.scss'
@@ -24,7 +22,7 @@ const MenuItemsDesktop = ({ menuItems, catalogItems }) => {
       <div className={cls.menuItems}>
         <button
           type="button"
-          className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+          className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-500"
           aria-expanded="false"
           onClick={() => setShowCatalog((m) => !m)}
         >
@@ -35,10 +33,15 @@ const MenuItemsDesktop = ({ menuItems, catalogItems }) => {
         {showCatalog && <CatalogMenuDesktop catalogItems={catalogItems} />}
       </div>
       {menuItems.map((i) => (
-        <Link key={i.link} href={i.link} className="text-sm font-semibold leading-6 text-gray-900">
+        <Link key={i.link} href={i.link} className="text-sm font-semibold leading-6 text-gray-500">
           {router.pathname === i.link ? <div className={cls.active}>{i.title}</div> : i.title}
         </Link>
       ))}
+      {/* {isAuthorized && isAdmin && ( */}
+      <Link href="/admin" className="text-sm font-semibold leading-6 text-gray-500">
+        {router.pathname === '/admin' ? <div className={cls.active}>Админ</div> : 'Админ'}
+      </Link>
+      {/* )} */}
     </div>
   )
 }
@@ -69,6 +72,14 @@ const MenuItemsMobile = ({ menuItems, catalogItems }) => {
           {i.title}
         </Link>
       ))}
+      {/* {isAuthorized && isAdmin && ( */}
+      <Link
+        href="/admin"
+        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+      >
+        Админ
+      </Link>
+      {/* )} */}
     </div>
   )
 }
@@ -102,7 +113,7 @@ const CatalogMenuMobile = ({ catalogItems }) => {
       {catalogItems.map((i) => (
         <Link
           href={`/catalog/${i.id}`}
-          className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-500 hover:bg-gray-50"
         >
           {i.title}
         </Link>
@@ -136,6 +147,7 @@ export const Header = () => {
 
   const catalogItems = useMemo(
     () => [
+      { id: '0', title: 'Все товары', description: 'всё' },
       { id: '1', title: 'Струнные инструменты', description: 'Гитары' },
       { id: '2', title: 'Клавишные инструменты', description: 'Фортепиано' },
       { id: '3', title: 'Духовые инструменты', description: 'Саксафоны' },
@@ -144,7 +156,7 @@ export const Header = () => {
   )
 
   return (
-    <header className="bg-white">
+    <header className={cls.header}>
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
         aria-label="Global"
@@ -152,6 +164,7 @@ export const Header = () => {
         <div className="flex lg:flex-1">
           <Link href="/" className={cls.logo}>
             <img className="h-10 w-auto" src={LOGO} alt="logo" />
+            <span className="py-2 pl-4 text-md font-semibold">MusicHome</span>
           </Link>
         </div>
 
@@ -174,9 +187,15 @@ export const Header = () => {
         <MenuItemsDesktop menuItems={menuItems} catalogItems={catalogItems} />
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-            Войти | Регистрация <span aria-hidden="true">&rarr;</span>
+          {/* {isAuthorized ? ( */}
+          {/* <Link href="/login" className="text-sm font-semibold leading-6 text-gray-500">
+              Войти | Регистрация <span aria-hidden="true">&rarr;</span>
+            </Link> */}
+          {/* ) : ( */}
+          <Link href="/profile" className="text-sm font-semibold leading-6 text-gray-500">
+            Личный кабинет <span aria-hidden="true">&rarr;</span>
           </Link>
+          {/* )} */}
         </div>
       </nav>
 
@@ -197,12 +216,21 @@ export const Header = () => {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="py-6">
-                  <Link
+                  {/* {isAuthorized ? ( */}
+                  {/* <Link
                     href="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Войти | Регистрация
+                  </Link> */}
+                  {/* ) : ( */}
+                  <Link
+                    href="/profile"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Личный кабинет
                   </Link>
+                  {/* )} */}
                 </div>
               </div>
             </div>

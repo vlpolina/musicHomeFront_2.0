@@ -2,8 +2,8 @@
   -ms-flex: 1;
   -webkit-flex: 1;
   flex: 1;
-  padding-top: var(--navbar-height);
-  background-color: rgb(227, 226, 226);
+  padding-top: 24px;
+  background-color: #f2f2f2;
 
   @media (max-width: 768px) {
     width: 100vw;

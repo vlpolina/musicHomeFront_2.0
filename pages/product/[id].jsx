@@ -2,10 +2,10 @@ import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
   return (
-    <Layout title="Вход">
+    <Layout title="Товар">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Вход</div>
+        <div className="container">Просмотр товара</div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

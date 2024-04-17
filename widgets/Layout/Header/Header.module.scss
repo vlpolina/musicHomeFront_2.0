@@ -1,9 +1,12 @@
-.logo {
-  height: 40px;
+.header {
+  background-color: #ffffff;
+  border-bottom: 1.5px solid #d4d3d3;
+}
 
-  @media (max-width: 1024px) {
-    display: none;
-  }
+.logo {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
 }
 
 .menuItems {
@@ -11,5 +14,6 @@
 }
 
 .active {
+  color: #181c25;
   border-bottom: 2px solid #181c25;
 }

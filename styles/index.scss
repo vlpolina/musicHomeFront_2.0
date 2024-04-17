@@ -30,15 +30,15 @@ ol {
 
 body,
 select {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  // font-family: 'Roboto', sans-serif;font-family
+  // font-style: normal;font-style
+  // font-weight: 400;font-weight
 }
 
 .sidebar_opened {
   & .layout_content,
   & footer {
-    // margin-left: var(--sidebar-width);margin-left
+    // margin-left: var(--sidebar-width);margin-leftmargin-left
   }
 
   @media (max-width: 768px) {
@@ -51,14 +51,14 @@ select {
 
 input,
 textarea {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  // font-family: 'Roboto', sans-serif;font-family
+  // font-style: normal;font-style
+  // font-weight: 400;font-weight
   outline: none;
 }
 
 button {
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Roboto', sans-serif;font-family
 }
 
 .container {
