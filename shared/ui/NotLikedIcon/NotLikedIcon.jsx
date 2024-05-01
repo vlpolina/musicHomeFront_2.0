@@ -6,8 +6,8 @@ export const NotLikedIcon = () => {
         fill="#1561F8"
         stroke="white"
         strokeWidth="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

@@ -5,8 +5,8 @@ export const ArrowLeft = () => {
         d="M14 6L8 12L14 18"
         stroke="#181C25"
         strokeWidth="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

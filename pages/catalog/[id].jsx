@@ -1,3 +1,4 @@
+import { Catalog } from '@features/Catalog'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Каталог">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Каталог</div>
+        <div className="container">
+          <Catalog />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

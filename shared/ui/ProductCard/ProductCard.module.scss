@@ -2,6 +2,10 @@
   max-width: 400px;
   border: 1px solid;
   border-color: #b8b8b8;
+
+  @media (max-width: 768px) {
+    max-width: 370px;
+  }
 }
 
 .imageWrapper {
@@ -17,6 +21,10 @@
   padding: 12px;
   margin: auto;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 358px;
+  }
 }
 
 .likedButton {

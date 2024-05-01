@@ -66,6 +66,7 @@ const MenuItemsMobile = ({ menuItems, catalogItems }) => {
       </div>
       {menuItems.map((i) => (
         <Link
+          key={i.link}
           href={i.link}
           className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
         >
@@ -112,6 +113,7 @@ const CatalogMenuMobile = ({ catalogItems }) => {
     <div className="mt-2 space-y-2" id="disclosure-1">
       {catalogItems.map((i) => (
         <Link
+          key={i.id}
           href={`/catalog/${i.id}`}
           className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-500 hover:bg-gray-50"
         >

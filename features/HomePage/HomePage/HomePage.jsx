@@ -37,7 +37,7 @@ export const HomePage = () => {
 
         <Typography className={cls.recomendationtTitle}>Наши товары</Typography>
         <div className={cls.carusel}>
-          <Button>
+          <Button className={cls.arrows}>
             <ArrowLeft />
           </Button>
           <ProductCard
@@ -48,22 +48,22 @@ export const HomePage = () => {
             image={IMAGE}
             canLiked
           />
-          <Button>
+          <Button className={cls.arrows}>
             <ArrowRight />
           </Button>
         </div>
         <br />
         <Typography className={cls.recomendationtTitle}>Наши партнёры</Typography>
         <div className={cls.carusel}>
-          <Button>
+          <Button className={cls.arrows}>
             <ArrowLeft />
           </Button>
           <div className={cls.customers}>
             {images.map((i) => (
-              <Customers image={i} />
+              <Customers key={i} image={i} />
             ))}
           </div>
-          <Button>
+          <Button className={cls.arrows}>
             <ArrowRight />
           </Button>
         </div>
