@@ -1,0 +1,36 @@
+.wrapper {
+  padding: 40px;
+  background: #ffffff;
+  border: 1.5px solid #d4d3d3;
+  border-radius: 8px;
+}
+
+.pageTitle {
+  margin-bottom: 40px;
+}
+
+.info {
+  display: flex;
+  text-align: center;
+}
+
+.recomendationtTitle {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  font-weight: 700;
+}
+
+.carusel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.customers {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}

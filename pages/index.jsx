@@ -2,7 +2,7 @@
 // import { Spinner } from "@shared/ui/Spinner/Spinner";
 import React from 'react'
 
-import { HomePage } from '@features/HomePage/HomePage'
+import { HomePage } from '@features/HomePage'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 const Home = () => {

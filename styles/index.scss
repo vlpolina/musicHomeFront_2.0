@@ -15,6 +15,9 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 html,
@@ -30,9 +33,9 @@ ol {
 
 body,
 select {
-  // font-family: 'Roboto', sans-serif;font-family
-  // font-style: normal;font-style
-  // font-weight: 400;font-weight
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .sidebar_opened {
