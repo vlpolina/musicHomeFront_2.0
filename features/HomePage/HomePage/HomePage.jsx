@@ -46,7 +46,6 @@ export const HomePage = () => {
               ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, temporibus. Fugit temporibus perferendis cum, enim ratione consequuntur nesciunt explicabo officiis veniam, nulla animi harum. Blanditiis velit veniam perferendis iste recusandae!'
             }
             image={IMAGE}
-            canLiked
           />
           <Button className={cls.arrows}>
             <ArrowRight />

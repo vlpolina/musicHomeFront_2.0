@@ -1,3 +1,4 @@
+import { Login } from '@features/Login'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Вход">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Вход</div>
+        <div className="loginContainer">
+          <Login />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

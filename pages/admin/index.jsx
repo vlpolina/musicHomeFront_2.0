@@ -1,3 +1,4 @@
+import { Admin } from '@features/Admin'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Админ">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Администрирование</div>
+        <div className="container">
+          <Admin />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

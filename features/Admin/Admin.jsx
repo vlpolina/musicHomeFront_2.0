@@ -1,26 +1,23 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Checkbox, Dialog, DialogTitle, FormControlLabel, Typography } from '@mui/material'
+import { Checkbox, FormControlLabel, Typography } from '@mui/material'
 
 import { MyButton } from '@shared/ui/Button/Button'
 import { FilterIcon } from '@shared/ui/FilterIcon/FilterICon'
 import { MyInput } from '@shared/ui/Input/Input'
+import { PlusIcon } from '@shared/ui/PlusIcon/PlusIcon'
 import { Popup } from '@shared/ui/Popup/Popup'
 import { ProductCard } from '@shared/ui/ProductCard/ProductCard'
 import { Search } from '@shared/ui/Search/Search'
 
 // import useSession from '@shared/lib/hooks/useSession'
 // import { ServerErrorMessage } from '@shared/ui/ServerErrorMessage/ServerErrorMessage'
-import cls from './Catalog.module.scss'
+import cls from './Admin.module.scss'
 
-export const Catalog = () => {
+export const Admin = () => {
+  const router = useRouter()
   const IMAGE = '/img/logo.svg'
-  const images = [
-    '/img/casio_logo.svg',
-    '/img/fender_logo.svg',
-    '/img/ibanez_logo.svg',
-    '/img/yamaha_logo.svg',
-  ]
   //   const { user } = useSession()
 
   const [search, setSearch] = useState('')
@@ -30,13 +27,24 @@ export const Catalog = () => {
   const [customers, setCustomers] = useState(['Yamaha', 'CASIO', 'RockDale'])
   const [errorCode, setErrorCode] = useState(null)
 
-  const category = 'Гитары'
   return (
     <div className={cls.wrapper}>
       {/* {errorCode && <ServerErrorMessage error={errorCode} />} */}
-      <Typography className={cls.pageTitle} variant="h5">
-        Каталог: {category}
-      </Typography>
+      <div className={cls.top}>
+        <Typography className={cls.pageTitle} variant="h5">
+          Администрирование
+        </Typography>
+        <MyButton
+          variant="contained"
+          size="large"
+          className={cls.filterButton}
+          onClick={() => {
+            router.push('/admin/product')
+          }}
+        >
+          Добавить товар <PlusIcon />
+        </MyButton>
+      </div>
 
       <div className={cls.filters}>
         <Search
@@ -64,7 +72,7 @@ export const Catalog = () => {
               ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, temporibus. Fugit temporibus perferendis cum, enim ratione consequuntur nesciunt explicabo officiis veniam, nulla animi harum. Blanditiis velit veniam perferendis iste recusandae!'
             }
             image={IMAGE}
-            canLiked
+            isAdmin
           />
           <ProductCard
             title={'Гитара'}
@@ -72,7 +80,7 @@ export const Catalog = () => {
               ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, temporibus. Fugit temporibus perferendis cum, enim ratione consequuntur nesciunt explicabo officiis veniam, nulla animi harum. Blanditiis velit veniam perferendis iste recusandae!'
             }
             image={IMAGE}
-            canLiked
+            isAdmin
           />
           <ProductCard
             title={'Гитара'}
@@ -80,7 +88,7 @@ export const Catalog = () => {
               ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, temporibus. Fugit temporibus perferendis cum, enim ratione consequuntur nesciunt explicabo officiis veniam, nulla animi harum. Blanditiis velit veniam perferendis iste recusandae!'
             }
             image={IMAGE}
-            canLiked
+            isAdmin
           />
           <ProductCard
             title={'Гитара'}
@@ -88,7 +96,7 @@ export const Catalog = () => {
               ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, temporibus. Fugit temporibus perferendis cum, enim ratione consequuntur nesciunt explicabo officiis veniam, nulla animi harum. Blanditiis velit veniam perferendis iste recusandae!'
             }
             image={IMAGE}
-            canLiked
+            isAdmin
           />
         </div>
       </div>

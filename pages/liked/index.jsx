@@ -1,3 +1,4 @@
+import { Liked } from '@features/Liked'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Избранное">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Избранное</div>
+        <div className="container">
+          <Liked />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

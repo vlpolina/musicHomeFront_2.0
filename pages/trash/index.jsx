@@ -1,3 +1,4 @@
+import { Trash } from '@features/Trash'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Корзина">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Корзина</div>
+        <div className="container">
+          <Trash />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

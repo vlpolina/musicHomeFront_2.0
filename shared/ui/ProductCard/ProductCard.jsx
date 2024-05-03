@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { React, useState } from 'react'
 
 import Card from '@mui/material/Card'
@@ -18,20 +19,21 @@ export const ProductCard = ({
   title,
   content,
   image,
-  canLiked,
-  canDelete,
   onLiked,
   onDelete,
   liked,
+  isAdmin,
 }) => {
+  const router = useRouter()
   const [likedProduct, setLikedProduct] = useState(liked)
+  const slug = 'guitar'
 
   return (
     <div className={className}>
       <Card sx={{ maxWidth: 345 }} className={cls.wrapper}>
         <div className={cls.imageWrapper}>
-          {canLiked && (
-            <div className={cls.likedButton}>
+          {!isAdmin && (
+            <div className={cls.actionButton}>
               <MyButton
                 variant="contained"
                 size="icon"
@@ -44,8 +46,8 @@ export const ProductCard = ({
               </MyButton>
             </div>
           )}
-          {canDelete && (
-            <div className={cls.deleteButton}>
+          {isAdmin && (
+            <div className={cls.actionButton}>
               <MyButton variant="contained" size="icon" onClick={onDelete}>
                 <TrashIcon />
               </MyButton>
@@ -62,12 +64,37 @@ export const ProductCard = ({
           </Typography>
         </CardContent>
         <CardActions className={cls.buttons}>
-          <MyButton variant="contained" className={cls.option}>
-            Подробнее
-          </MyButton>
-          <MyButton variant="outlined" className={cls.option}>
-            В корзину
-          </MyButton>
+          {isAdmin ? (
+            <>
+              <MyButton
+                variant="contained"
+                className={cls.option}
+                onClick={() => router.push(`admin/product/${slug}`)}
+              >
+                Редактировать
+              </MyButton>
+              <MyButton
+                variant="outlined"
+                className={cls.option}
+                onClick={() => router.push(`/product/${slug}`)}
+              >
+                Подробнее
+              </MyButton>
+            </>
+          ) : (
+            <>
+              <MyButton
+                variant="contained"
+                className={cls.option}
+                onClick={() => router.push(`/product/${slug}`)}
+              >
+                Подробнее
+              </MyButton>
+              <MyButton variant="outlined" className={cls.option}>
+                В корзину
+              </MyButton>
+            </>
+          )}
         </CardActions>
       </Card>
     </div>

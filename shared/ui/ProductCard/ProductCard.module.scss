@@ -27,19 +27,10 @@
   }
 }
 
-.likedButton {
+.actionButton {
   position: absolute;
   top: 8px;
   right: 8px;
-  z-index: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.deleteButton {
-  position: absolute;
-  top: 8px;
-  right: 80px;
   z-index: 1;
   display: flex;
   justify-content: flex-end;

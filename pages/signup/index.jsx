@@ -1,3 +1,4 @@
+import { Signup } from '@features/Signup'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -5,7 +6,9 @@ export default function () {
     <Layout title="Регистрация">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">Регистрация</div>
+        <div className="loginContainer">
+          <Signup />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

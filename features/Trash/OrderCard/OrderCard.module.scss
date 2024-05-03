@@ -1,0 +1,33 @@
+.wrapper {
+  border: 1px solid;
+  border-color: #b8b8b8;
+  border-radius: 8px;
+}
+
+.top {
+  padding: 8px 20px;
+  background: #ececec;
+  border-bottom: 1px solid #b8b8b8;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  @media (max-width: 992px) {
+    padding: 10px 8px;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.title,
+.cost {
+  font-weight: 700;
+}

@@ -1,0 +1,33 @@
+.wrapper {
+  padding: 40px;
+  background: #ffffff;
+  border: 1.5px solid #d4d3d3;
+  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    padding: 20px 8px;
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.pageTitle {
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+.button {
+  margin-bottom: 40px;
+}

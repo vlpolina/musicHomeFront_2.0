@@ -1,13 +1,13 @@
-import { Support } from '@features/Support'
+import { ProductDetails } from '@features/ProductDetails'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
   return (
-    <Layout title="Поддержка">
+    <Layout title="Просмотр карточки товара">
       <Layout.Header />
       <Layout.Content>
         <div className="container">
-          <Support />
+          <ProductDetails />
         </div>
       </Layout.Content>
       <Layout.Footer />

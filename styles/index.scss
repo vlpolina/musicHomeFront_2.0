@@ -66,8 +66,16 @@ button {
 
 .container {
   width: calc(100% - 130px);
-  max-width: var(--container-width);
+  max-width: 1366px;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    width: calc(100% - 30px);
+  }
+}
+
+.loginContainer {
+  width: 768px;
+  margin: 60px auto;
   @media (max-width: 768px) {
     width: calc(100% - 30px);
   }
@@ -92,7 +100,7 @@ button {
 }
 
 .error-text {
-  color: var(--additional-error);
+  color: #ff3c38;
 
   a {
     color: inherit;
@@ -104,7 +112,7 @@ button {
   position: relative;
   display: inline-flex;
   width: 100%;
-  background-color: var(--base-300);
+  background-color: #e8eaee;
   border: none;
   border-radius: 4px;
   outline: none;
@@ -159,24 +167,24 @@ button {
 
 .rc-select-single .rc-select-selection-item {
   font-size: 14px;
-  color: var(--content-900);
+  color: #181c25;
 }
 
 .rc-select-single .rc-select-selection-placeholder,
 .rc-select-selector .rc-select-selection-placeholder {
-  color: var(--content-800);
+  color: #66707f;
 }
 
 .rc-select-dropdown {
   position: absolute;
   top: 10px;
-  z-index: var(--z-index-9);
+  z-index: 90;
   padding-top: 10px;
   padding-bottom: 10px;
   overflow: hidden;
-  background: var(--base-100);
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
 }
 
 .rc-select-dropdown-hidden {
@@ -195,7 +203,7 @@ button {
 .rc-select-item-group {
   font-size: 80%;
   font-weight: bold;
-  color: var(--content-800);
+  color: #66707f;
 }
 
 .rc-select-item-option {
@@ -215,7 +223,7 @@ button {
 }
 
 .rc-select-item-option-active {
-  background: var(--base-100);
+  background: #ffffff;
 }
 
 .rc-select-item-option-disabled {
@@ -224,7 +232,7 @@ button {
 }
 
 .rc-select-item-empty {
-  color: var(--content-800);
+  color: #66707f;
   text-align: center;
 }
 
