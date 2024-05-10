@@ -1,19 +1,18 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
+import Cookies from 'js-cookie'
 
 import { ArrowDown } from '@shared/ui/ArrowDown/ArrowDown'
 import { Burger } from '@shared/ui/Burger/Burger'
-import Button from '@shared/ui/Button/Button'
 import { CloseButton } from '@shared/ui/CloseButton/CloseButton'
 
-// import useSession from '@shared/lib/hooks/useSession'
-// import { Notification } from '../Notifications'
 import cls from './Header.module.scss'
 
 const LOGO = '/img/logo.svg'
 
-const MenuItemsDesktop = ({ menuItems, catalogItems }) => {
+const MenuItemsDesktop = ({ menuItems, catalogItems, isAuthorized, isAdmin }) => {
   const router = useRouter()
   const [showCatalog, setShowCatalog] = useState(false)
 
@@ -37,16 +36,16 @@ const MenuItemsDesktop = ({ menuItems, catalogItems }) => {
           {router.pathname === i.link ? <div className={cls.active}>{i.title}</div> : i.title}
         </Link>
       ))}
-      {/* {isAuthorized && isAdmin && ( */}
-      <Link href="/admin" className="text-sm font-semibold leading-6 text-gray-500">
-        {router.pathname === '/admin' ? <div className={cls.active}>Админ</div> : 'Админ'}
-      </Link>
-      {/* )} */}
+      {isAuthorized && isAdmin && (
+        <Link href="/admin" className="text-sm font-semibold leading-6 text-gray-500">
+          {router.pathname === '/admin' ? <div className={cls.active}>Админ</div> : 'Админ'}
+        </Link>
+      )}
     </div>
   )
 }
 
-const MenuItemsMobile = ({ menuItems, catalogItems }) => {
+const MenuItemsMobile = ({ menuItems, catalogItems, isAuthorized, isAdmin }) => {
   const [showCatalog, setShowCatalog] = useState(false)
   return (
     <div className="space-y-2 py-6">
@@ -73,14 +72,14 @@ const MenuItemsMobile = ({ menuItems, catalogItems }) => {
           {i.title}
         </Link>
       ))}
-      {/* {isAuthorized && isAdmin && ( */}
-      <Link
-        href="/admin"
-        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-      >
-        Админ
-      </Link>
-      {/* )} */}
+      {isAuthorized && isAdmin && (
+        <Link
+          href="/admin"
+          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+        >
+          Админ
+        </Link>
+      )}
     </div>
   )
 }
@@ -125,8 +124,8 @@ const CatalogMenuMobile = ({ catalogItems }) => {
 }
 
 export const Header = () => {
-  //   const { isAuthorized, isLoad, user, access } = useSession()
-
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
   const menuItems = useMemo(
@@ -157,6 +156,11 @@ export const Header = () => {
     []
   )
 
+  useEffect(() => {
+    setIsAuthorized(Cookies.get('isAuthorized'))
+    setIsAdmin(Cookies.get('isAdmin'))
+  }, [])
+
   return (
     <header className={cls.header}>
       <nav
@@ -185,19 +189,23 @@ export const Header = () => {
           </div>
         )}
 
-        {/* <MenuItemsDesktop menuItems={isAuthorized ? menuItems : menuItemsNotAuth} /> */}
-        <MenuItemsDesktop menuItems={menuItems} catalogItems={catalogItems} />
+        <MenuItemsDesktop
+          isAdmin={isAdmin}
+          isAuthorized={isAuthorized}
+          menuItems={isAuthorized ? menuItems : menuItemsNotAuth}
+          catalogItems={catalogItems}
+        />
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {/* {isAuthorized ? ( */}
-          {/* <Link href="/login" className="text-sm font-semibold leading-6 text-gray-500">
+          {isAuthorized ? (
+            <Link href="/profile" className="text-sm font-semibold leading-6 text-gray-500">
+              Личный кабинет <span aria-hidden="true">&rarr;</span>
+            </Link>
+          ) : (
+            <Link href="/login" className="text-sm font-semibold leading-6 text-gray-500">
               Войти | Регистрация <span aria-hidden="true">&rarr;</span>
-            </Link> */}
-          {/* ) : ( */}
-          <Link href="/profile" className="text-sm font-semibold leading-6 text-gray-500">
-            Личный кабинет <span aria-hidden="true">&rarr;</span>
-          </Link>
-          {/* )} */}
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -213,26 +221,31 @@ export const Header = () => {
               <CloseButton setOpen={setShowMenu} />
             </div>
 
-            <MenuItemsMobile menuItems={menuItems} catalogItems={catalogItems} />
+            <MenuItemsMobile
+              isAdmin={isAdmin}
+              isAuthorized={isAuthorized}
+              menuItems={isAuthorized ? menuItems : menuItemsNotAuth}
+              catalogItems={catalogItems}
+            />
 
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="py-6">
-                  {/* {isAuthorized ? ( */}
-                  {/* <Link
-                    href="/login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Войти | Регистрация
-                  </Link> */}
-                  {/* ) : ( */}
-                  <Link
-                    href="/profile"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Личный кабинет
-                  </Link>
-                  {/* )} */}
+                  {isAuthorized ? (
+                    <Link
+                      href="/profile"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Личный кабинет
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Войти | Регистрация
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

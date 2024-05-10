@@ -9,6 +9,11 @@
   }
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
 .pageTitle {
   margin-bottom: 40px;
   font-weight: 700;
@@ -62,4 +67,9 @@
     flex-direction: column;
     gap: 8px;
   }
+}
+
+.success {
+  font-weight: 700;
+  color: #389430;
 }

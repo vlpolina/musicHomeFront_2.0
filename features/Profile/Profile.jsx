@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 
 import { TextField, Typography } from '@mui/material'
+import Cookies from 'js-cookie'
 
+import { api } from '@shared/api/api'
 import { MyButton } from '@shared/ui/Button/Button'
 
-// import useSession from '@shared/lib/hooks/useSession'
-// import { ServerErrorMessage } from '@shared/ui/ServerErrorMessage/ServerErrorMessage'
 import cls from './Profile.module.scss'
 
 const inputStyles = {
@@ -30,18 +30,43 @@ const buttonStyles = {
 
 export const Profile = (id) => {
   const router = useRouter()
-  const IMAGE = '/img/logo.svg'
-  //   const { user } = useSession()
 
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
   const [adress, setAdress] = useState('')
   const [phone, setPhone] = useState('')
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const logout = useCallback(() => {
+    setError(null)
+    setIsLoading(true)
+
+    api
+      .post('user/logout/')
+      .then(() => {
+        Cookies.remove('isAuthorized')
+        Cookies.remove('isAdmin')
+        Cookies.remove('accessToken')
+        Cookies.remove('refreshToken')
+        router.push('/')
+      })
+      .catch((e) => {
+        console.log(e)
+        if (e.response?.status === 401) {
+          Cookies.remove('isAuthorized')
+          Cookies.remove('isAdmin')
+          Cookies.remove('accessToken')
+          Cookies.remove('refreshToken')
+          router.push('/')
+        } else setError('Ошибка! Что-то пошло не так...')
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
 
   return (
     <div className={cls.wrapper}>
-      {/* {errorCode && <ServerErrorMessage error={errorCode} />} */}
       <div className={cls.top}>
         <Typography className={cls.pageTitle} variant="h5">
           Мой профиль
@@ -104,6 +129,10 @@ export const Profile = (id) => {
           buttonStyle={buttonStyles}
           placeholder="+7 (000) 000-00-00"
         />
+
+        <MyButton variant="contained" size="large" onClick={logout}>
+          Выйти из аккаунта
+        </MyButton>
       </div>
     </div>
   )
