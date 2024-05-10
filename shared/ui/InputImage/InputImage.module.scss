@@ -1,0 +1,17 @@
+.button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.image {
+  max-width: 400px;
+  max-height: 400px;
+  overflow: hidden;
+  border: 1.5px solid #b8b8b8;
+  border-radius: 8px;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+}

@@ -17,14 +17,13 @@ const StyledInput = styled(OutlinedInput)({
   },
 })
 
-export const MyInput = ({ className, size, value, onChange, placeholder }) => {
+export const MyInput = ({ className, value, onChange, placeholder }) => {
   return (
     <StyledInput
       placeholder={placeholder}
       value={value}
       onChange={onChange}
       className={className}
-      size={size}
       inputProps={{ style: { borderColor: '#1561f8' } }}
       fullWidth
     />

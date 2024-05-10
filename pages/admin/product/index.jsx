@@ -1,4 +1,4 @@
-import { Admin } from '@features/Admin'
+import { AdminProductEditor } from '@features/AdminProductEditor'
 import { Layout } from '@widgets/Layout/Layout/Layout'
 
 export default function () {
@@ -6,7 +6,9 @@ export default function () {
     <Layout title="Админ">
       <Layout.Header />
       <Layout.Content>
-        <div className="container">создание товара</div>
+        <div className="container">
+          <AdminProductEditor />
+        </div>
       </Layout.Content>
       <Layout.Footer />
     </Layout>

@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 
+import { TextField } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -56,8 +57,10 @@ export const TrashProductCard = ({
         <Typography variant="body2" color="text.secondary">
           {count > 0 ? `В наличии, осталось ${count}` : 'Товар закончился'}
         </Typography>
-        <MyInput
-          placeholder="Количество к покупке"
+        <TextField
+          className={cls.input}
+          label="Количество к покупке"
+          type="number"
           value={buyCount}
           onChange={(e) => setBuyCount(e.target.value)}
         />

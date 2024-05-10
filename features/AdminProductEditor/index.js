@@ -1,0 +1,1 @@
+export { AdminProductEditor } from './AdminProductEditor'
