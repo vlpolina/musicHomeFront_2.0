@@ -9,8 +9,7 @@ const Home = () => {
       <Layout.Header />
       <Layout.Content>
         <div className="container">
-          {' '}
-          <HomePage />{' '}
+          <HomePage />
         </div>
       </Layout.Content>
       <Layout.Footer />

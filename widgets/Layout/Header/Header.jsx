@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import Cookies from 'js-cookie'
 
+import { api } from '@shared/api/api'
 import { ArrowDown } from '@shared/ui/ArrowDown/ArrowDown'
 import { Burger } from '@shared/ui/Burger/Burger'
 import { CloseButton } from '@shared/ui/CloseButton/CloseButton'
@@ -16,12 +17,26 @@ const MenuItemsDesktop = ({ menuItems, catalogItems, isAuthorized, isAdmin }) =>
   const router = useRouter()
   const [showCatalog, setShowCatalog] = useState(false)
 
+  useEffect(() => {
+    const handleDocumentClick = (event) => {
+      if (!event.target.closest('.catalog-menu')) {
+        setShowCatalog(false)
+      }
+    }
+
+    document.addEventListener('click', handleDocumentClick)
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+    }
+  }, [showCatalog])
+
   return (
     <div className="hidden lg:flex lg:gap-x-12">
       <div className={cls.menuItems}>
         <button
           type="button"
-          className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-500"
+          className="catalog-menu flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-500"
           aria-expanded="false"
           onClick={() => setShowCatalog((m) => !m)}
         >
@@ -52,7 +67,7 @@ const MenuItemsMobile = ({ menuItems, catalogItems, isAuthorized, isAdmin }) => 
       <div className="-mx-3">
         <button
           type="button"
-          className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          className="catalog-menu flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
           aria-controls="disclosure-1"
           aria-expanded="false"
           onClick={() => setShowCatalog((m) => !m)}
@@ -61,7 +76,9 @@ const MenuItemsMobile = ({ menuItems, catalogItems, isAuthorized, isAdmin }) => 
           <ArrowDown />
         </button>
 
-        {showCatalog && <CatalogMenuMobile catalogItems={catalogItems} />}
+        {showCatalog && (
+          <CatalogMenuMobile catalogItems={catalogItems} setShowCatalog={setShowCatalog} />
+        )}
       </div>
       {menuItems.map((i) => (
         <Link
@@ -86,7 +103,7 @@ const MenuItemsMobile = ({ menuItems, catalogItems, isAuthorized, isAdmin }) => 
 
 const CatalogMenuDesktop = ({ catalogItems }) => {
   return (
-    <div className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+    <div className="catalog-menu absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
       <div className="p-2">
         {catalogItems.map((i) => (
           <div
@@ -107,7 +124,7 @@ const CatalogMenuDesktop = ({ catalogItems }) => {
   )
 }
 
-const CatalogMenuMobile = ({ catalogItems }) => {
+const CatalogMenuMobile = ({ catalogItems, setShowCatalog }) => {
   return (
     <div className="mt-2 space-y-2" id="disclosure-1">
       {catalogItems.map((i) => (
@@ -115,6 +132,7 @@ const CatalogMenuMobile = ({ catalogItems }) => {
           key={i.id}
           href={`/catalog/${i.id}`}
           className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-500 hover:bg-gray-50"
+          // onClick={setShowCatalog(false)}
         >
           {i.title}
         </Link>
@@ -127,6 +145,7 @@ export const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [categories, setCategories] = useState(null)
 
   const menuItems = useMemo(
     () => [
@@ -146,19 +165,41 @@ export const Header = () => {
     []
   )
 
-  const catalogItems = useMemo(
-    () => [
-      { id: '0', title: 'Все товары', description: 'всё' },
-      { id: '1', title: 'Струнные инструменты', description: 'Гитары' },
-      { id: '2', title: 'Клавишные инструменты', description: 'Фортепиано' },
-      { id: '3', title: 'Духовые инструменты', description: 'Саксафоны' },
-    ],
-    []
-  )
+  const catalogItems = useMemo(() => {
+    if (!categories) {
+      return []
+    }
+    const updatedCatalogItems = categories.map((category) => {
+      return {
+        id: category.id.toString(),
+        title: category.name,
+        description: '',
+      }
+    })
+
+    updatedCatalogItems.unshift({
+      id: '0',
+      title: 'Все товары',
+      description: 'Все товары',
+    })
+
+    return updatedCatalogItems
+  }, [categories])
 
   useEffect(() => {
     setIsAuthorized(Cookies.get('isAuthorized'))
     setIsAdmin(Cookies.get('isAdmin'))
+  }, [])
+
+  useEffect(() => {
+    api
+      .get('catalogCats/')
+      .then(({ data }) => {
+        setCategories(data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }, [])
 
   return (

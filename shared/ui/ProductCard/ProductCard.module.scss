@@ -36,6 +36,11 @@
   justify-content: flex-end;
 }
 
+.title {
+  height: 65px;
+  overflow-y: hidden;
+}
+
 .content {
   height: 80px;
   overflow-y: hidden;

@@ -51,7 +51,17 @@ export const Login = () => {
   }, [username, password, setIsSuccess])
 
   useEffect(() => {
-    isSuccess &&
+    if (isSuccess) {
+      api
+        .get('getUserId/')
+        .then(({ data }) => {
+          Cookies.set('userId', data.id)
+        })
+        .catch((e) => {
+          console.log(e)
+          setError('Ошибка! Что-то пошло не так... ')
+        })
+
       api
         .get('checkAdmin/')
         .then(({ data }) => {
@@ -65,6 +75,7 @@ export const Login = () => {
           setError('Ошибка! Что-то пошло не так... ')
         })
         .finally(() => setIsLoading(false))
+    }
   }, [isSuccess])
 
   return (

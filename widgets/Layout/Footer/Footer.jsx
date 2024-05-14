@@ -10,19 +10,19 @@ const Footer = () => {
     setDisplayCookie(false)
   }
 
-  useEffect(() => {
-    const accessCookie = localStorage.getItem('checkedCookie')
+  // useEffect(() => {
+  //   const accessCookie = localStorage.getItem('checkedCookie')
 
-    if (accessCookie) {
-      setDisplayCookie(false)
-    }
+  //   if (accessCookie) {
+  //     setDisplayCookie(false)
+  //   }
 
-    window.addEventListener('storage', (e) => {
-      if (e.key === 'checkedCookie' && e.newValue === 'true') {
-        setDisplayCookie(false)
-      }
-    })
-  }, [])
+  //   window.addEventListener('storage', (e) => {
+  //     if (e.key === 'checkedCookie' && e.newValue === 'true') {
+  //       setDisplayCookie(false)
+  //     }
+  //   })
+  // }, [])
 
   if (!displayCookie) {
     return null

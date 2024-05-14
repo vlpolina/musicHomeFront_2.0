@@ -10,24 +10,29 @@
 }
 
 .top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 32px;
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
   }
 }
 
 .pageTitle {
   margin-bottom: 40px;
 
-  @media (max-width: 768px) {
-    margin-bottom: 20px;
+  @media (max-width: 992px) {
+    margin-bottom: 0px;
     text-align: center;
   }
 }
 
 .button {
+  max-height: 45px;
   margin-bottom: 40px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
 }
