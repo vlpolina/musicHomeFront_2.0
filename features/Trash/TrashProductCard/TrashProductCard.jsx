@@ -17,8 +17,8 @@ export const TrashProductCard = ({
   id,
   title,
   count,
-  countToBuy,
-  setCountToBuy,
+  products,
+  setProducts,
   image,
   cost,
   status,
@@ -26,6 +26,7 @@ export const TrashProductCard = ({
 }) => {
   const [isLiked, setIsLiked] = useState()
   const [inTrash, setInTrash] = useState()
+  const [countToBuy, setCountToBuy] = useState(1)
 
   useEffect(() => {
     if (status) {
@@ -33,6 +34,21 @@ export const TrashProductCard = ({
       setInTrash(status.trash)
     }
   }, [status])
+
+  useEffect(() => {
+    setCountToBuy(products.find((i) => i.ID_product === id).count_buy)
+  }, [products])
+
+  useEffect(() => {
+    setProducts(
+      products.map((i) => {
+        if (i.ID_product === id) {
+          return { ...i, count_buy: countToBuy === '' ? 0 : Number(countToBuy) }
+        }
+        return i
+      })
+    )
+  }, [countToBuy])
 
   return (
     <Card className={cls.wrapper}>
@@ -80,7 +96,7 @@ export const TrashProductCard = ({
           className={cls.input}
           label="Количество к покупке"
           type="number"
-          value={countToBuy}
+          value={Number(countToBuy)}
           onChange={(e) => setCountToBuy(e.target.value, id)}
         />
         {count > 0 ? (

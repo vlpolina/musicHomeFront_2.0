@@ -53,21 +53,12 @@ export const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       api
-        .get('getUserId/')
-        .then(({ data }) => {
-          Cookies.set('userId', data.id)
-        })
-        .catch((e) => {
-          console.log(e)
-          setError('Ошибка! Что-то пошло не так... ')
-        })
-
-      api
         .get('checkAdmin/')
         .then(({ data }) => {
           if (data.is_staff || data.is_superuser) {
             Cookies.set('isAdmin', true)
           }
+          Cookies.set('userId', data.id)
           router.push('/')
         })
         .catch((e) => {

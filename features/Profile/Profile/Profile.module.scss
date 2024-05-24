@@ -68,3 +68,19 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 32px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}

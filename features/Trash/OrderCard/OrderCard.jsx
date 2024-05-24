@@ -7,8 +7,7 @@ import { MyButton } from '@shared/ui/Button/Button'
 
 import cls from './OrderCard.module.scss'
 
-export const OrderCard = ({ sumCost, countToBuy, onContinue }) => {
-  console.log(sumCost)
+export const OrderCard = ({ sumCost, countToBuy, setModal }) => {
   return (
     <Card className={cls.wrapper}>
       <div className={cls.top}>
@@ -25,13 +24,7 @@ export const OrderCard = ({ sumCost, countToBuy, onContinue }) => {
         ) : (
           <Typography className={cls.cost}>Корзина пуста</Typography>
         )}
-        <MyButton
-          variant="contained"
-          size="icon"
-          onClick={() => {
-            //
-          }}
-        >
+        <MyButton variant="contained" size="icon" onClick={() => setModal(true)}>
           Продолжить оформление
         </MyButton>
       </div>

@@ -1,0 +1,50 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  line-height: 1.5;
+  border: 1px solid;
+  border-color: #d4d3d3;
+  border-radius: 8px;
+
+  &:active {
+    border-color: #1561f8;
+  }
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info {
+  text-align: center;
+}
+
+.orderTitle {
+  font-weight: 700;
+}
+
+.orderContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 0;
+  margin: 12px 0;
+  border-top: solid 1px #d4d3d3;
+  border-bottom: solid 1px #d4d3d3;
+}
+
+.success {
+  font-weight: 700;
+  color: #389430;
+}
+
+.link {
+  color: #1561f8;
+  text-decoration: underline;
+}
