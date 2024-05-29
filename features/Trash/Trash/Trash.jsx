@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import Cookies from 'js-cookie'
 
+import { Notification } from '@features/Notification/Notification'
 import { changeProductStatus } from '@helpers/changeProductStatus'
 import { isValidEmail } from '@helpers/validateUserData'
 
@@ -31,6 +32,8 @@ export const Trash = () => {
   const [address, setAddress] = useState('')
   const [payment, setPayment] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
+  const [notifReset, setNotifReset] = useState(false)
+  const [notifOrder, setNotifOrder] = useState(false)
 
   const changeStatus = ({ productId, productCost, option }) => {
     changeProductStatus({ productId, productCost, option, status, setStatus })
@@ -47,6 +50,7 @@ export const Trash = () => {
       .put('trashReset/')
       .then(() => {
         setProducts([])
+        setNotifReset(true)
       })
       .catch((e) => {
         console.log(e)
@@ -104,7 +108,7 @@ export const Trash = () => {
     api
       .put('user/update/', { email, last_name: surname, first_name: name })
       .then(() => {
-        // уведомление
+        setNotifOrder(true)
       })
       .catch((e) => {
         console.log(e)
@@ -231,6 +235,16 @@ export const Trash = () => {
           createOrder={createOrder}
           sumTrashCost={sumTrashCost()}
           error={orderError}
+        />
+      )}
+      {notifReset && (
+        <Notification text="Корзина очищена!" type="success" onClose={() => setNotifReset(false)} />
+      )}
+      {notifOrder && (
+        <Notification
+          text="Заказ успешно оформлен!"
+          type="success"
+          onClose={() => setNotifOrder(false)}
         />
       )}
     </div>

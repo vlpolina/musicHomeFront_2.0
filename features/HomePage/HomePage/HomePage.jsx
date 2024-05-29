@@ -5,9 +5,8 @@ import { ArrowRight } from '@shared/ui/ArrowRight/ArrowRight'
 import { ProductCard } from '@shared/ui/ProductCard/ProductCard'
 
 import { Customers } from '../Customers/Customers'
+import { MyMap } from '../Map/Map'
 
-// import useSession from '@shared/lib/hooks/useSession'
-// import { ServerErrorMessage } from '@shared/ui/ServerErrorMessage/ServerErrorMessage'
 import cls from './HomePage.module.scss'
 
 export const HomePage = () => {
@@ -18,13 +17,9 @@ export const HomePage = () => {
     '/img/ibanez_logo.svg',
     '/img/yamaha_logo.svg',
   ]
-  //   const { user } = useSession()
-
-  //   const [errorCode, setErrorCode] = useState(null)
 
   return (
     <>
-      {/* {errorCode && <ServerErrorMessage error={errorCode} />} */}
       <div className={cls.wrapper}>
         <Typography className={cls.pageTitle} variant="h5">
           Главная
@@ -65,6 +60,10 @@ export const HomePage = () => {
           <Button className={cls.arrows}>
             <ArrowRight />
           </Button>
+        </div>
+        <div>
+          <Typography className={cls.recomendationtTitle}>Наше местоположение</Typography>
+          <MyMap />
         </div>
       </div>
     </>

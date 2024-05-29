@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { React, useEffect, useState } from 'react'
+import { React, useCallback, useEffect, useState } from 'react'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -7,6 +7,9 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
+import { Notification } from '@features/Notification/Notification'
+
+import { api } from '@shared/api/api'
 import { MyButton } from '@shared/ui/Button/Button'
 import { LikedIcon } from '@shared/ui/LikedIcon/LikedIcon'
 import { NotLikedIcon } from '@shared/ui/NotLikedIcon/NotLikedIcon'
@@ -27,11 +30,30 @@ export const ProductCard = ({
   isCatalog,
   isAuthorized,
   isAdmin,
+  setError,
+  setIsLoading,
 }) => {
   const router = useRouter()
 
   const [isLiked, setIsLiked] = useState()
   const [inTrash, setInTrash] = useState()
+  const [notif, setNotif] = useState(false)
+
+  const onDelete = useCallback(() => {
+    setError(null)
+    setIsLoading(true)
+
+    api
+      .delete(`crudAdminProducts/${slug}/`)
+      .then(() => {
+        setNotif(true)
+      })
+      .catch((e) => {
+        console.log(e)
+        setError('Ошибка! Что-то пошло не так...')
+      })
+      .finally(() => setIsLoading(false))
+  }, [slug])
 
   useEffect(() => {
     if (status) {
@@ -145,6 +167,9 @@ export const ProductCard = ({
           )}
         </CardActions>
       </Card>
+      {notif && (
+        <Notification text="Товар успешно удален!" type="success" onClose={() => setNotif(false)} />
+      )}
     </div>
   )
 }

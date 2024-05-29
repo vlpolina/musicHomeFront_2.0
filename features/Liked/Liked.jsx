@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import Cookies from 'js-cookie'
 
+import { Notification } from '@features/Notification/Notification'
 import { changeProductStatus } from '@helpers/changeProductStatus'
 
 import { api } from '@shared/api/api'
@@ -20,6 +21,7 @@ export const Liked = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [notifReset, setNotifReset] = useState(false)
 
   const changeStatus = ({ productId, productCost, option }) => {
     changeProductStatus({ productId, productCost, option, status, setStatus })
@@ -36,6 +38,7 @@ export const Liked = () => {
       .put('likedReset/')
       .then(() => {
         setProducts([])
+        setNotifReset(true)
       })
       .catch((e) => {
         console.log(e)
@@ -126,6 +129,13 @@ export const Liked = () => {
         </>
       ) : (
         <Typography variant="h6">Пока что в "Избранном" пусто</Typography>
+      )}
+      {notifReset && (
+        <Notification
+          text="Избранное очищено!"
+          type="success"
+          onClose={() => setNotifReset(false)}
+        />
       )}
     </div>
   )

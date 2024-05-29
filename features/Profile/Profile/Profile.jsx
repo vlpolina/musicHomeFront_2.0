@@ -5,6 +5,7 @@ import PhoneInput from 'react-phone-input-2'
 import { TextField, Typography } from '@mui/material'
 import Cookies from 'js-cookie'
 
+import { Notification } from '@features/Notification/Notification'
 import { isValidEmail } from '@helpers/validateUserData'
 
 import { api } from '@shared/api/api'
@@ -45,6 +46,7 @@ export const Profile = (id) => {
   const [orders, setOrders] = useState([])
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [notif, setNotif] = useState(false)
 
   const save = useCallback(() => {
     setError(null)
@@ -57,7 +59,7 @@ export const Profile = (id) => {
     api
       .put('user/update/', { email, last_name: surname, first_name: name })
       .then(() => {
-        // уведомление
+        setNotif(true)
       })
       .catch((e) => {
         console.log(e)
@@ -191,6 +193,13 @@ export const Profile = (id) => {
           <Orders orders={orders} />
         </div>
       </div>
+      {notif && (
+        <Notification
+          text="Данные пользователя успешно обновлены!"
+          type="success"
+          onClose={() => setNotif(false)}
+        />
+      )}
     </div>
   )
 }
