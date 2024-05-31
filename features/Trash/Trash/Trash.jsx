@@ -47,7 +47,7 @@ export const Trash = () => {
     setIsLoading(true)
 
     api
-      .put('trashReset/')
+      .put('trash/reset/')
       .then(() => {
         setProducts([])
         setNotifReset(true)
@@ -90,7 +90,7 @@ export const Trash = () => {
     }))
 
     api
-      .put('createOrder/', {
+      .put('orders/create/', {
         products: order,
         address,
         client_phone: phone,
@@ -125,7 +125,7 @@ export const Trash = () => {
     setIsLoading(true)
 
     api
-      .get('getStatusesForCatalog/')
+      .get('catalog/getStatuses/')
       .then(({ data }) => {
         setStatus(data)
       })

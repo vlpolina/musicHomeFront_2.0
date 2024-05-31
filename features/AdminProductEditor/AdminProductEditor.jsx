@@ -100,7 +100,7 @@ export const AdminProductEditor = ({ slug }) => {
         })
 
     api
-      .get('catalogCats/')
+      .get('catalog/cats/')
       .then(({ data }) => {
         setCategories(data)
       })
@@ -110,7 +110,7 @@ export const AdminProductEditor = ({ slug }) => {
       })
 
     api
-      .get('customersForCat/')
+      .get('catalog/customers/')
       .then(({ data }) => {
         setCustomers(data)
       })

@@ -97,7 +97,7 @@ export const Admin = () => {
     setIsLoading(true)
 
     api
-      .get('catalogAll/')
+      .get('catalog/all/')
       .then(({ data }) => {
         setCatalog(data)
         setInitialCatalog(data)
@@ -108,7 +108,7 @@ export const Admin = () => {
       })
 
     api
-      .get('customersForCat/')
+      .get('catalog/customers/')
       .then(({ data }) => {
         setCustomers(data)
       })

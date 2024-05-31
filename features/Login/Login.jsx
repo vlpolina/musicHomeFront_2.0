@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -10,6 +11,7 @@ import { MyButton } from '@shared/ui/Button/Button'
 import { MyInput } from '@shared/ui/Input/Input'
 import { ServerErrorMessage } from '@shared/ui/ServerErrorMessage/ServerErrorMessage'
 import { Spinner } from '@shared/ui/Spinner/Spinner'
+import { VK } from '@shared/ui/VK/VK'
 
 import cls from './Login.module.scss'
 
@@ -41,9 +43,11 @@ export const Login = () => {
       })
       .catch((e) => {
         console.log(e)
-        e.response?.status === 401
-          ? setError('Ошибка входа, неверный username или пароль!')
-          : setError('Ошибка! Что-то пошло не так...')
+        e.response?.detail
+          ? setError('Учетная запись с указанными данными была заблокирована.')
+          : e.response?.status === 401
+            ? setError('Ошибка входа, неверный username или пароль!')
+            : setError('Ошибка! Что-то пошло не так...')
       })
       .finally(() => setIsLoading(false))
 
@@ -53,7 +57,7 @@ export const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       api
-        .get('checkAdmin/')
+        .get('user/checkAdmin/')
         .then(({ data }) => {
           if (data.is_staff || data.is_superuser) {
             Cookies.set('isAdmin', true)
@@ -114,6 +118,13 @@ export const Login = () => {
               Зарегистрироваться
             </MyButton>
           </div>
+          <Link href="/forgot-password" className={cls.forgot}>
+            Забыли пароль?
+          </Link>
+          <MyButton className={cls.buttonVk} variant="contained" size="large">
+            <VK className={cls.vk} />
+            Войти через ВК
+          </MyButton>
         </div>
       </div>
     </>

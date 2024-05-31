@@ -193,7 +193,7 @@ export const Header = () => {
 
   useEffect(() => {
     api
-      .get('catalogCats/')
+      .get('catalog/cats/')
       .then(({ data }) => {
         setCategories(data)
       })

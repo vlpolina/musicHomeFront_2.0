@@ -101,7 +101,7 @@ export const Catalog = ({ id }) => {
 
     isAuthorized &&
       api
-        .get('getStatusesForCatalog/')
+        .get('catalog/getStatuses/')
         .then(({ data }) => {
           setStatus(data)
         })
@@ -110,7 +110,7 @@ export const Catalog = ({ id }) => {
         })
 
     api
-      .get('catalogCats/')
+      .get('catalog/cats/')
       .then(({ data }) => {
         setCategory(
           Number(id) === 0 ? 'Все товары' : data.find((category) => category.id === Number(id)).name
@@ -121,7 +121,7 @@ export const Catalog = ({ id }) => {
       })
 
     api
-      .get(Number(id) === 0 || id === undefined ? 'catalogAll/' : `catalog/${id}/`)
+      .get(Number(id) === 0 || id === undefined ? 'catalog/all/' : `catalog/${id}/`)
       .then(({ data }) => {
         setCatalog(data)
         setInitialCatalog(data)
@@ -132,7 +132,7 @@ export const Catalog = ({ id }) => {
       })
 
     api
-      .get('customersForCat/')
+      .get('catalog/customers/')
       .then(({ data }) => {
         setCustomers(data)
       })

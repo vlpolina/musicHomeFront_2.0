@@ -34,7 +34,7 @@ export const ProductDetailsCard = ({
   const like = ({ id, cost }) => {
     if (!liked) {
       api
-        .post('likedAdd/', {
+        .post('liked/add/', {
           ID_product: id,
           count: 1,
           sum_cost: cost,
@@ -48,7 +48,7 @@ export const ProductDetailsCard = ({
         })
     } else if (liked) {
       api
-        .delete(orderId ? `likedDelete/${Number(orderId)}/` : `likedDelete/${Number(order)}/`)
+        .delete(orderId ? `liked/delete/${Number(orderId)}/` : `liked/delete/${Number(order)}/`)
         .then(() => {
           setLiked((prev) => !prev)
         })
@@ -61,7 +61,7 @@ export const ProductDetailsCard = ({
   const putTrash = ({ id, cost }) => {
     if (!trash) {
       api
-        .post('trashAdd/', {
+        .post('trash/add/', {
           ID_product: id,
           count: 1,
           sum_cost: cost,
@@ -75,7 +75,7 @@ export const ProductDetailsCard = ({
         })
     } else if (trash) {
       api
-        .delete(orderId ? `trashDelete/${Number(orderId)}/` : `trashDelete/${Number(order)}/`)
+        .delete(orderId ? `trash/delete/${Number(orderId)}/` : `trash/delete/${Number(order)}/`)
         .then(() => {
           setTrash((prev) => !prev)
         })

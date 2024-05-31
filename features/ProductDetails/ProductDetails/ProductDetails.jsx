@@ -19,8 +19,6 @@ export const ProductDetails = ({ slug }) => {
   const [customers, setCustomers] = useState([])
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLiked, setIsLiked] = useState()
-  const [inTrash, setInTrash] = useState()
 
   useEffect(() => {
     setError(null)
@@ -37,7 +35,7 @@ export const ProductDetails = ({ slug }) => {
         })
 
     api
-      .get('customersForCat/')
+      .get('catalog/customers/')
       .then(({ data }) => {
         setCustomers(data)
       })

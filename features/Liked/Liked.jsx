@@ -35,7 +35,7 @@ export const Liked = () => {
     setIsLoading(true)
 
     api
-      .put('likedReset/')
+      .put('liked/reset/')
       .then(() => {
         setProducts([])
         setNotifReset(true)
@@ -56,7 +56,7 @@ export const Liked = () => {
     setIsLoading(true)
 
     api
-      .get('getStatusesForCatalog/')
+      .get('catalog/getStatuses/')
       .then(({ data }) => {
         setStatus(data)
       })

@@ -6,7 +6,7 @@ export const changeProductStatus = ({ productId, productCost, option, status, se
 
   if (!existingItem || (existingItem && !statusItem)) {
     api
-      .post(option === 'toLike' ? 'likedAdd/' : 'trashAdd/', {
+      .post(option === 'toLike' ? 'liked/add/' : 'trash/add/', {
         ID_product: productId,
         count: 1,
         sum_cost: productCost,
@@ -35,8 +35,8 @@ export const changeProductStatus = ({ productId, productCost, option, status, se
     api
       .delete(
         option === 'toLike'
-          ? `likedDelete/${Number(existingItem.order_id)}/`
-          : `trashDelete/${Number(existingItem.order_id)}/`
+          ? `liked/delete/${Number(existingItem.order_id)}/`
+          : `trash/delete/${Number(existingItem.order_id)}/`
       )
       .then(() => {
         setStatus(

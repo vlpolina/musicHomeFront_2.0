@@ -48,7 +48,7 @@ export const Signup = () => {
       .then(() => setIsSucess(true))
       .catch((e) => {
         console.log(e)
-        e.response.status === 400
+        e.response?.status === 400
           ? setError('Пользователь с таким адресом электронной почты уже существует!')
           : setError('Ошибка! Что-то пошло не так... Попробуйте другое имя пользователя')
       })
